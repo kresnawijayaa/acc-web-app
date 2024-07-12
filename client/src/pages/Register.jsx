@@ -12,13 +12,14 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch(`${baseURL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

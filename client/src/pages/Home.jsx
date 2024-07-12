@@ -24,6 +24,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true); // State loading
   // const googleMapsApiKey = "AIzaSyAsvgcF3U2fa5KsPQxpVtzHhmoQUF7HMhI"; // Replace with your API Key
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAP_API
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   const defaultCenter = {
     lat: -5.395489,
@@ -52,7 +53,7 @@ export default function Home() {
 
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/customers",
+          `${baseURL}/api/customers`,
           {
             headers: { authorization: `${token}` },
           }
@@ -177,9 +178,9 @@ export default function Home() {
       let url = "";
 
       if (district !== "All" && city !== "All") {
-        url = `http://localhost:3000/api/customers/nearby?lat=${lat}&lng=${lng}&radius=1000&kecamatan=${encodedDistrict}&kota=${encodedCity}`;
+        url = `${baseURL}/api/customers/nearby?lat=${lat}&lng=${lng}&radius=1000&kecamatan=${encodedDistrict}&kota=${encodedCity}`;
       } else {
-        url = `http://localhost:3000/api/customers/nearby?lat=${lat}&lng=${lng}&radius=1000&kecamatan=&kota=`;
+        url = `${baseURL}/api/customers/nearby?lat=${lat}&lng=${lng}&radius=1000&kecamatan=&kota=`;
       }
 
       const response = await axios.get(url, {
@@ -201,7 +202,7 @@ export default function Home() {
 
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/customers/${customerId}`,
+        `${baseURL}/api/customers/${customerId}`,
         {
           headers: {
             authorization: `${token}`,

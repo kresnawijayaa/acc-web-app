@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function Bulk() {
   const [data, setData] = useState([]);
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   const handleFileUpload = (data) => {
     const formattedData = data.slice(1).map((row) => ({
@@ -34,7 +35,7 @@ export default function Bulk() {
   
     console.log(data, "<<<>>>")
     try {
-      await axios.post("http://localhost:3000/api/customers/bulk", 
+      await axios.post(`${baseURL}/api/customers/bulk`, 
         { customers: data }, // Mengirim array data customer dalam body request
         {
           headers: {

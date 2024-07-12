@@ -21,12 +21,13 @@ const Login = () => {
   const [otpResendCount, setOtpResendCount] = useState(0);
 
   const cancelButtonRef = useRef(null);
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Clear previous error message
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch(`${baseURL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +57,7 @@ const Login = () => {
 
   const sendOtp = async () => {
     try {
-      await fetch("http://localhost:3000/api/auth/otp", {
+      await fetch(`${baseURL}/api/auth/otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +105,7 @@ const Login = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/verify-otp", {
+      const response = await fetch(`${baseURL}/api/auth/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
